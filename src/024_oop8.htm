@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>原型【八】继承的三种方式</title>
+		<script type=text/javascript charset=utf-8>
+			/*
+				// 原型继承
+				//原型继承的特点：即继承了父类的模版，又继承了 父类的原型对象
+				function Person(name, age){
+					this.name = name;
+					this.age = age;
+				}
+				
+				function Boy(sex){
+					this.sex =  sex;
+				}
+				
+				Boy.prototype = new Person('z3', 22);
+				Person.prototype.id = 101;
+				var b1 = new Boy('male');
+				alert(b1.name);
+				alert(b1.id);
+				
+				// 父类
+				function Person(name, age){
+					this.name = name ; 
+					this.age  = age ;
+				}
+				// 父类的原型对象属性
+				Person.prototype.id = 10 ;
+				
+				// 子类
+				function Boy(sex){
+					this.sex = sex ; 
+				}
+				
+				//继承已经实现了 
+				Boy.prototype = new Person('z3');
+			
+				var b = new Boy();
+				alert(b.name);
+				alert(b.id);
+				
+				*/
+				/*
+				// 类继承(只继承模版,不继承原型对象) (借用构造函数的方式继承)
+				
+				// 父类
+				function Person(name, age){
+					this.name = name ; 
+					this.age  = age ;
+				}
+				// 父类的原型对象属性
+				Person.prototype.id = 104 ;
+				
+				// 子类
+				function Boy(name , age , sex){
+					// call apply
+					Person.call(this,name,age);
+					this.sex = sex ; 
+				}
+				
+				var b = new Boy('z3' , 20 , 'male');
+				//alert(b.name);
+				//alert(b.age);
+				//alert(b.sex);
+				alert(b.id); //父类的原型对象并没有继承
+				*/
+				
+				// 原型继承+借用构造函数继承 = 混合继承
+				
+				
+				// 父类
+				function Person(name, age){
+					this.name = name ; 
+					this.age  = age ;
+				}
+				// 父类的原型对象属性
+				Person.prototype.id = 10 ;
+				Person.prototype.sayName = function(){alert(this.name);};
+				
+				// 子类
+				function Boy(name , age , sex){
+					// call apply
+					Person.call(this,name,age); // 1 借用构造函数继承 继承父类的模版
+					this.sex = sex ; 
+				}	
+				
+				// 2 原型继承
+				// 只剩下 父类的实例 和 父类的原型对象的关系了
+				Boy.prototype = new Person(); //继承父类的原型对象
+				
+				
+				var b = new Boy('L4' , 20 , 'female');
+				alert(b.name);
+				alert(b.sex);
+				b.sayName();
+				
+				var string1 ="hello" 
+
+                var mix= string1.split("").join("-");
+				alert(mix);
+				/**/
+				
+				
+						
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
